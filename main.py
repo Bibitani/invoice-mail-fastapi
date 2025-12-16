@@ -5,11 +5,11 @@ from email_sender import send_email
 
 app = FastAPI()
 
-
 @app.post("/process-invoices")
 def process_invoices():
-    vendor_df, invoice_df = load_data()
+    print("🚀 /process-invoices endpoint HIT")
 
+    vendor_df, invoice_df = load_data()
     results = []
 
     for _, invoice in invoice_df.iterrows():
@@ -29,6 +29,6 @@ def process_invoices():
         })
 
     return {
-        "message": "All invoices processed",
-        "summary": results
+        "message": "Invoices processed and emails sent",
+        "results": results
     }

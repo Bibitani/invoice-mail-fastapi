@@ -1,21 +1,13 @@
 import pandas as pd
+import os
 
-# -------------------------------------------------------
-# PATHS (keep same for now)
-# -------------------------------------------------------
-BASE_PATH = r"C:\Users\bibiy\Desktop\L n T\mock_mail"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATA_DIR = os.path.join(BASE_DIR, "data")
 
-VENDOR_FILE = rf"{BASE_PATH}\FINAL_VENDOR_MASTER_FILLED.xlsx"
-INVOICE_FILE = rf"{BASE_PATH}\INVOICE_VALIDATED_OUTPUT.xlsx"
-
+VENDOR_FILE = os.path.join(DATA_DIR, "FINAL_VENDOR_MASTER_FILLED.xlsx")
+INVOICE_FILE = os.path.join(DATA_DIR, "INVOICE_VALIDATED_OUTPUT.xlsx")
 
 def load_data():
-    """
-    Loads vendor and invoice Excel files.
-    Returns:
-        vendor_df (DataFrame)
-        invoice_df (DataFrame)
-    """
     vendor_df = pd.read_excel(VENDOR_FILE)
     invoice_df = pd.read_excel(INVOICE_FILE)
     return vendor_df, invoice_df

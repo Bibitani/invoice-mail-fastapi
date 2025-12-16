@@ -1,14 +1,18 @@
+import os
 import smtplib
 from email.message import EmailMessage
 
-SYSTEM_EMAIL = "bbn.nitt@gmail.com"
-SYSTEM_PASS = "tlar dgao kirq ztos"  
-
+SYSTEM_EMAIL = os.getenv("SYSTEM_EMAIL")
+SYSTEM_PASS = os.getenv("SYSTEM_PASS")
 
 def send_email(subject, body, to_list, cc_list):
     """
     Sends email using Gmail SMTP.
     """
+
+    if not SYSTEM_EMAIL or not SYSTEM_PASS:
+        raise RuntimeError("Email credentials not set in environment variables")
+
     msg = EmailMessage()
     msg["Subject"] = subject
     msg["From"] = SYSTEM_EMAIL

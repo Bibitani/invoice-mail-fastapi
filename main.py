@@ -1,4 +1,5 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import traceback
 from excel_loader import load_data
@@ -31,6 +32,15 @@ app = FastAPI(
             "description": "Production server"
         }
     ]
+)
+
+# Add CORS middleware for Azure AI Foundry
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allows all origins for anonymous connection
+    allow_credentials=True,
+    allow_methods=["*"],  # Allows all methods (GET, POST, etc.)
+    allow_headers=["*"],  # Allows all headers
 )
 
 # Response models
